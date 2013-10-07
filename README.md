@@ -47,6 +47,24 @@ $(window).smack()
     });    
 ```
 
+### Example infinite scroll
+```javascript
+// Infinite scroll binding
+var that = this;
+(function infiniteScroll () {
+
+    $(window).smack({ threshold: 0.8 })
+      .then(function () {
+        return that.collection.fetch();
+      })
+      .done(function (resp) {
+        // However your response indicates more results
+        if (resp.hasMore) infiniteScroll();
+      });
+
+})();
+```
+
 ### Options
 
 *threshold*: float between 0 and 1
