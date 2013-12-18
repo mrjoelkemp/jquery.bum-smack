@@ -76,9 +76,14 @@ var that = this;
 
 ### Options
 
-*threshold*: float between 0 and 1 or string px value in format `'150px'`
+*threshold*: float between 0 and 1 or string px value in the format `'150px'`
 
-* represents scrolling through anywhere from 0 to 100% of the element
-* alternatly scrolling within a px value of the bottom of the element
+* represents scrolling through anywhere from 0 to 100% of the element or, if a pixel value is supplied,
+the distance from the bottom of the element
+
 * default = 1; you're notified when you hit the bottom of the element
 
+
+### Changelog
+
+v1.1 Threshold supports pixel values (thanks @TheBox193)

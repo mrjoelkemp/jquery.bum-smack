@@ -21,4 +21,9 @@
       $('.case4').siblings('.success').first().fadeIn('fast');
     });
 
+  $('.case5').smack({ threshold: '50px' })
+    .done(function () {
+      $('.case5').siblings('.success').first().fadeIn('fast');
+    });
+
 })(window.$);

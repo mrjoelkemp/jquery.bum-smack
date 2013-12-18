@@ -1,20 +1,17 @@
-// https://github.com/mrjoelkemp/jquery.bum-smack
-
 ;(function ($) {
   'use strict';
-  var $this, deferred, threshold, scrollTop, innerHeight, scrollHeight, distanceFromTop, thresholdFromTop;
 
   // Options:
   //  threshold: distance (percentage or px distance from the bottom of the element)
   $.fn.smack = function (options) {
     options = options || {};
 
-        $this     = $(this),
+    var $this     = $(this),
         deferred  = new $.Deferred(),
         threshold = options.threshold || 1;
 
     $this.on('scroll.smack', function () {
-          scrollTop     = $this.scrollTop();
+      var scrollTop     = $this.scrollTop(),
           // Keep these computed here in case the div changes dimensions at runtime
           innerHeight   = $this[0] === window ? $this.height() : $this.innerHeight(),
           // ScrollHeight doesn't exist on the document nor window
@@ -22,9 +19,9 @@
 
           distanceFromTop  = scrollTop + innerHeight,
           // Threshold for either percentage and px from bottom
-          thresholdFromTop = (threshold.toString().toLowerCase().indexOf('px') >= 0) ? scrollHeight - parseInt(threshold) : scrollHeight * threshold;
+          thresholdFromTop = (threshold.toString().toLowerCase().indexOf('px') >= 0) ? scrollHeight - parseInt(threshold, 10) : scrollHeight * threshold;
 
-      if(distanceFromTop >= thresholdFromTop) {
+      if (distanceFromTop >= thresholdFromTop) {
         $this.off('scroll.smack');
         deferred.resolve();
       }
