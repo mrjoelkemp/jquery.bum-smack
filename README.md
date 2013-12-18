@@ -38,6 +38,15 @@ $(selector).smack({ threshold: 0.8 })
     });
 ```
 
+Detect when you've scrolled within 200px of the bottom of the element
+
+```javascript
+$(selector).smack({ threshold: '200px' })
+    .done(function () {
+      // Do stuff like fetch from a collection
+    });
+```
+
 Detect when smacking the bottom of the page itself
 
 ```javascript
@@ -67,8 +76,9 @@ var that = this;
 
 ### Options
 
-*threshold*: float between 0 and 1
+*threshold*: float between 0 and 1 or string px value in format `'150px'`
 
 * represents scrolling through anywhere from 0 to 100% of the element
+* alternatly scrolling within a px value of the bottom of the element
 * default = 1; you're notified when you hit the bottom of the element
 
