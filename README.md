@@ -16,7 +16,7 @@ smacked the bottom of the element. If you don't have any more results, then you 
 
 ### Demo:
 
-http://jsfiddle.net/mrjoelkemp/TLdSW/1/
+http://jsfiddle.net/TLdSW/3/
 
 ### Usage
 
