@@ -83,6 +83,10 @@ the distance from the bottom of the element
 
 * default = 1; you're notified when you hit the bottom of the element
 
+### Building & Testing
+
+* To build, run `npm install` and then `grunt`
+* To run the tests, point your browser to `test/runner.html`
 
 ### Changelog
 
