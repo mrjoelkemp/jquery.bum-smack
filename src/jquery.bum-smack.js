@@ -18,8 +18,11 @@
           scrollHeight  = $this[0] === window ? $(document).height() : $this[0].scrollHeight,
 
           distanceFromTop  = scrollTop + innerHeight,
+
+          isPixelThreshold = threshold.toString().toLowerCase().indexOf('px') !== -1,
+
           // Threshold for either percentage and px from bottom
-          thresholdFromTop = (threshold.toString().toLowerCase().indexOf('px') >= 0) ? scrollHeight - parseInt(threshold, 10) : scrollHeight * threshold;
+          thresholdFromTop = isPixelThreshold ? scrollHeight - parseInt(threshold, 10) : Math.floor(scrollHeight * threshold);
 
       if (distanceFromTop >= thresholdFromTop) {
         $this.off('scroll.smack');

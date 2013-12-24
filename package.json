@@ -1,0 +1,26 @@
+{
+  "name": "jquery.bum-smack",
+  "version": "1.1.0",
+  "description": "For when you hit the bottom of a dom element while scrolling",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mrjoelkemp/jquery.bum-smack.git"
+  },
+  "keywords": [
+    "jquery",
+    "infinite",
+    "scroll"
+  ],
+  "author": "Joel Kemp",
+  "license": "MIT",
+  "gitHead": "84653705d74fd8074225f3830578d2c808a091b4",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.16.2",
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-cli": "~0.1.11"
+  }
+}
