@@ -3,12 +3,19 @@
 
   // Options:
   //  threshold: distance (percentage or px distance from the bottom of the element)
+  //  edge: 'top' or 'bottom' (which edge of the element watch)
   $.fn.smack = function (options) {
-    options = options || {};
+    options = $.extend({}, {'edge': 'bottom'}, options);
+    options = $.extend({}, {
+        'threshold' : options.edge == 'top' ? 0 : 1,
+        'deferred'  : new $.Deferred()
+    }, options);
 
-    var $this     = $(this),
-        deferred  = new $.Deferred(),
-        threshold = options.threshold || 1;
+    var $this           = $(this),
+        bumSmackOptions = $this.data('bum-smack') || {};
+
+    bumSmackOptions[options.edge] = options;
+    $this.data('bum-smack', bumSmackOptions);
 
     $this.on('scroll.smack', function () {
       var scrollTop     = $this.scrollTop(),
@@ -17,20 +24,39 @@
           // ScrollHeight doesn't exist on the document nor window
           scrollHeight  = $this[0] === window ? $(document).height() : $this[0].scrollHeight,
 
-          distanceFromTop  = scrollTop + innerHeight,
+          distanceFromTop  = scrollTop + innerHeight;
 
-          isPixelThreshold = threshold.toString().toLowerCase().indexOf('px') !== -1,
+      if (bumSmackOptions.bottom) {
+        var isPixelThresholdFromBottom = bumSmackOptions.bottom.threshold.toString().toLowerCase().indexOf('px') !== -1,
+            // Threshold for either percentage and px from bottom
+            thresholdFromTop           = isPixelThresholdFromBottom ? scrollHeight - parseInt(bumSmackOptions.bottom.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.bottom.threshold);
 
-          // Threshold for either percentage and px from bottom
-          thresholdFromTop = isPixelThreshold ? scrollHeight - parseInt(threshold, 10) : Math.floor(scrollHeight * threshold);
-
-      if (distanceFromTop >= thresholdFromTop) {
-        $this.off('scroll.smack');
-        deferred.resolve();
+        if (distanceFromTop >= thresholdFromTop) {
+            bumSmackOptions.bottom.deferred.resolve();
+            bumSmackOptions.bottom = false;
+        }
       }
+
+      if (bumSmackOptions.top) {
+        var isPixelThresholdFromTop = bumSmackOptions.top.threshold.toString().toLowerCase().indexOf('px') !== -1,
+            // Threshold for either percentage and px from top
+            thresholdFromTop        = isPixelThresholdFromTop ? parseInt(bumSmackOptions.top.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.top.threshold);
+
+        if (scrollTop <= thresholdFromTop) {
+            bumSmackOptions.top.deferred.resolve();
+            bumSmackOptions.top = false;
+        }
+      }
+
+      $this.data('bum-smack', bumSmackOptions);
+
+      if (!bumSmackOptions.top && !bumSmackOptions.bottom) {
+        $this.off('scroll.smack');
+      }
+
     });
 
-    return deferred.promise();
+    return options.deferred.promise();
   };
 
 })(window.jQuery);
