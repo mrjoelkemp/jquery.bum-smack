@@ -3,11 +3,11 @@
 
   // Options:
   //  threshold: distance (percentage or px distance from the bottom of the element)
-  //  edge: 'top' or 'bottom' (which edge of the element watch)
+  //  edge: 'top' or 'bottom' (which edge of the element to watch)
   $.fn.smack = function (options) {
     options = $.extend({}, {'edge': 'bottom'}, options);
     options = $.extend({}, {
-        'threshold' : options.edge == 'top' ? 0 : 1,
+        'threshold' : options.edge === 'top' ? 0 : 1,
         'deferred'  : new $.Deferred()
     }, options);
 
@@ -24,12 +24,14 @@
           // ScrollHeight doesn't exist on the document nor window
           scrollHeight  = $this[0] === window ? $(document).height() : $this[0].scrollHeight,
 
-          distanceFromTop  = scrollTop + innerHeight;
+          distanceFromTop  = scrollTop + innerHeight,
+
+          isPixelThresholdFromBottom, isPixelThresholdFromTop, thresholdFromTop;
 
       if (bumSmackOptions.bottom) {
-        var isPixelThresholdFromBottom = bumSmackOptions.bottom.threshold.toString().toLowerCase().indexOf('px') !== -1,
-            // Threshold for either percentage and px from bottom
-            thresholdFromTop           = isPixelThresholdFromBottom ? scrollHeight - parseInt(bumSmackOptions.bottom.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.bottom.threshold);
+        isPixelThresholdFromBottom = bumSmackOptions.bottom.threshold.toString().toLowerCase().indexOf('px') !== -1;
+        // Threshold for either percentage and px from bottom
+        thresholdFromTop           = isPixelThresholdFromBottom ? scrollHeight - parseInt(bumSmackOptions.bottom.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.bottom.threshold);
 
         if (distanceFromTop >= thresholdFromTop) {
             bumSmackOptions.bottom.deferred.resolve();
@@ -38,9 +40,9 @@
       }
 
       if (bumSmackOptions.top) {
-        var isPixelThresholdFromTop = bumSmackOptions.top.threshold.toString().toLowerCase().indexOf('px') !== -1,
-            // Threshold for either percentage and px from top
-            thresholdFromTop        = isPixelThresholdFromTop ? parseInt(bumSmackOptions.top.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.top.threshold);
+        isPixelThresholdFromTop = bumSmackOptions.top.threshold.toString().toLowerCase().indexOf('px') !== -1;
+        // Threshold for either percentage and px from top
+        thresholdFromTop        = isPixelThresholdFromTop ? parseInt(bumSmackOptions.top.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.top.threshold);
 
         if (scrollTop <= thresholdFromTop) {
             bumSmackOptions.top.deferred.resolve();
