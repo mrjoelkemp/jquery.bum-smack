@@ -17,7 +17,7 @@
     bumSmackOptions[options.edge] = options;
     $this.data('bum-smack', bumSmackOptions);
 
-    $this.on('scroll.smack', function () {
+    $this.off('scroll.smack').on('scroll.smack', function () {
       var scrollTop     = $this.scrollTop(),
           // Keep these computed here in case the div changes dimensions at runtime
           innerHeight   = $this[0] === window ? $this.height() : $this.innerHeight(),
@@ -29,9 +29,9 @@
       if (bumSmackOptions.bottom) {
         var isPixelThresholdFromBottom = bumSmackOptions.bottom.threshold.toString().toLowerCase().indexOf('px') !== -1,
             // Threshold for either percentage and px from bottom
-            thresholdFromTop           = isPixelThresholdFromBottom ? scrollHeight - parseInt(bumSmackOptions.bottom.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.bottom.threshold);
+            thresholdFromBottom        = isPixelThresholdFromBottom ? scrollHeight - parseInt(bumSmackOptions.bottom.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.bottom.threshold);
 
-        if (distanceFromTop >= thresholdFromTop) {
+        if (distanceFromTop >= thresholdFromBottom) {
             bumSmackOptions.bottom.deferred.resolve();
             bumSmackOptions.bottom = false;
         }
