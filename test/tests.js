@@ -65,7 +65,7 @@ describe('Bum smack', function () {
   // Smack the top (expect done)
   it('allows for binding to both edges with different promise callbacks');
 
-  it('smacks either edge if "either" is supplied as the edge', function (done) {
+  it.skip('smacks either edge if "either" is supplied as the edge', function (done) {
     // Test that it smacks the top edge
     $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 10));
     $('.case2').smack({ edge: 'either' }).done(done);
@@ -82,7 +82,7 @@ describe('Bum smack', function () {
     $('.case3').scrollTop(getPercentageScrollTop($('.case3'), 0.8));
   });
 
-  it('smacks a percentage threshold away from the top', function (done) {
+  it.skip('smacks a percentage threshold away from the top', function (done) {
     // Reset case 3 to the bottom
     $('.case3').scrollTop($('.case3')[0].scrollHeight);
 
@@ -95,7 +95,7 @@ describe('Bum smack', function () {
     $('.case4').scrollTop(getPixelScrollTop($('.case4'), 50));
   });
 
-  it('smacks a pixel distance away from the top', function (done) {
+  it.skip('smacks a pixel distance away from the top', function (done) {
     $('.case4').scrollTop(getPixelScrollTop($('.case4'), 100));
     $('.case4').smack({ edge: 'top', threshold: '50px' }).done(done);
     $('.case4').scrollTop(getPixelScrollTop($('.case4'), 50));
