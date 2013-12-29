@@ -1,6 +1,6 @@
 {
   "name": "jquery.bum-smack",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "For when you hit the bottom of a dom element while scrolling",
   "repository": {
     "type": "git",
