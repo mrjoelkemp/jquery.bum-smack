@@ -47,7 +47,23 @@ describe('Bum smack', function () {
   // http://chaijs.com/plugins/sinon-chai
   it('does not smack the top edge if the element was already at the top');
 
+  // Reset element's scrollTop to top
+  // Bind to 50px from bottom
+  // Smack the bottom
+  //
+  it('remembers the previous settings of the supplied edge');
 
+  // Manually bind a scroll.smack event to the element with a callback
+  // Do a smack bind on that element
+  // Scroll
+  // Expect the first (manual) binding to never be called
+  it('only has one active smack binding');
+
+  // Bind to the bottom edge
+  // Bind to the top edge
+  // Smack the bottom (expect done)
+  // Smack the top (expect done)
+  it('allows for binding to both edges with different promise callbacks');
 
   it('smacks either edge if "either" is supplied as the edge', function (done) {
     // Test that it smacks the top edge
