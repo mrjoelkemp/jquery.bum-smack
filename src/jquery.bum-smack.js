@@ -24,6 +24,7 @@
 
     // Use the new options to replace the previous one
     bumSmackOptions[options.edge] = options;
+    bumSmackOptions.scrollTop     = $this.scrollTop();
     $this.data('bum-smack', bumSmackOptions);
 
     // Only allow a single scroll event binding
@@ -34,11 +35,15 @@
           // ScrollHeight doesn't exist on the document nor window
           scrollHeight  = $this[0] === window ? $(document).height() : $this[0].scrollHeight,
 
+          direction     = scrollTop > bumSmackOptions.scrollTop ? 'down' : 'up',
+
           distanceFromTop  = scrollTop + innerHeight,
 
           isPixelThresholdFromBottom, isPixelThresholdFromTop, thresholdFromTop, thresholdFromBottom;
 
-      if (bumSmackOptions.bottom) {
+      bumSmackOptions.scrollTop = scrollTop;
+
+      if (direction === 'down' && bumSmackOptions.bottom) {
         isPixelThresholdFromBottom = bumSmackOptions.bottom.threshold.toString().toLowerCase().indexOf('px') !== -1;
         // Threshold for either percentage and px from bottom
         thresholdFromBottom        = isPixelThresholdFromBottom ? scrollHeight - parseInt(bumSmackOptions.bottom.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.bottom.threshold);
@@ -50,7 +55,7 @@
         }
       }
 
-      if (bumSmackOptions.top) {
+      if (direction === 'up' && bumSmackOptions.top) {
         isPixelThresholdFromTop = bumSmackOptions.top.threshold.toString().toLowerCase().indexOf('px') !== -1;
         // Threshold for either percentage and px from top
         thresholdFromTop        = isPixelThresholdFromTop ? parseInt(bumSmackOptions.top.threshold, 10) : Math.floor(scrollHeight * bumSmackOptions.top.threshold);
