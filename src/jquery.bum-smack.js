@@ -35,7 +35,7 @@
           // ScrollHeight doesn't exist on the document nor window
           scrollHeight  = $this[0] === window ? $(document).height() : $this[0].scrollHeight,
 
-          direction     = scrollTop > bumSmackOptions.scrollTop ? 'down' : 'up',
+          direction     = (scrollTop > bumSmackOptions.scrollTop ? 'down' : (scrollTop < bumSmackOptions.scrollTop ? 'up' : false)),
 
           distanceFromTop  = scrollTop + innerHeight,
 
