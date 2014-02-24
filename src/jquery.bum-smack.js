@@ -10,8 +10,8 @@
     // Default is the absolute top of the screen or bottom of the screen
     // Override with any newly supplied options
     options = $.extend({}, {
-        'threshold' : options.edge === 'top' ? 0 : 1,
-        'deferred'  : new $.Deferred()
+      'threshold' : options.edge === 'top' ? 0 : 1,
+      'deferred'  : new $.Deferred()
     }, options);
 
     var $this           = $(this),
