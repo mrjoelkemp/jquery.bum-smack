@@ -39,39 +39,44 @@ describe('Bum smack', function () {
     $('.case1').scrollTop(0);
   });
 
-  it('does not smack the top edge if the element was already at the top', function () {
+  it('does not smack the top edge if the element was already at the top', function (done) {
     var cb = sinon.spy();
 
     $('.case1').scrollTop(0);
     $('.case1').smack({ edge: 'top' }).done(cb);
-    chai.expect(cb.called).to.equal(false);
+    $('.case1').scrollTop(10);
+    $('.case1').smack({ edge: 'top' }).done(function () {
+      chai.expect(cb.called).to.equal(false);
+      done();
+    });
+
+    $('.case1').scrollTop(0);
   });
 
-  // Reset element's scrollTop to top
-  // Bind to 50px from bottom
-  // Smack the bottom
-  //
-  it('remembers the previous settings of the supplied edge');
-
-  // Manually bind a scroll.smack event to the element with a callback
-  // Do a smack bind on that element
-  // Scroll
-  // Expect the first (manual) binding to never be called
-  it('only has one active smack binding', function () {
+  it('only has one active smack binding', function (done) {
     var cb1 = sinon.spy();
 
     $('.case1').scrollTop(0);
     $('.case1').on('scroll.smack', cb1);
-    $('.case1').smack({ threshold: 0.8 }).done();
+    $('.case1').smack({ threshold: 0.8 }).done(function () {
+      chai.expect(cb1.called).to.equal(false);
+      done();
+    });
+
     $('.case1').scrollTop(getPercentageScrollTop($('.case1'), 0.8));
-    chai.expect(cb1.called).to.equal(false);
   });
 
   // Bind to the bottom edge
   // Bind to the top edge
   // Smack the bottom (expect done)
   // Smack the top (expect done)
-  it('allows for binding to both edges with different promise callbacks');
+  it('allows for binding to both edges with different promise callbacks', function () {
+    var cb = sinon.spy();
+
+    $('.case1').scrollTop(0);
+    // $('.case1').smack({ threshold: 1 }).done(cb);
+    // $('.case1').smack({ threshold: 1 }).done(cb);
+  });
 
   it.skip('smacks either edge if "either" is supplied as the edge', function (done) {
     // Test that it smacks the top edge
