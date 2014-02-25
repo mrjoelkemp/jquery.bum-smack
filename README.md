@@ -15,6 +15,8 @@ After you've `smack`ed the bottom (or top), you have the option to call smack (i
 For example, after you've loaded another page of results, you would want to detect when you've
 smacked the bottom of the element. If you don't have any more results, then you wouldn't want to keep being notified.
 
+`bower install jquery.bum-smack`
+
 ### Demo:
 
 http://jsfiddle.net/TLdSW/3/
