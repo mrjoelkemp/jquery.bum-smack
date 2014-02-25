@@ -84,10 +84,6 @@ describe('Bum smack', function () {
     $('.case1').toPercentFromTop(0.8);
   });
 
-  // Bind to the bottom edge
-  // Bind to the top edge
-  // Smack the bottom (expect done)
-  // Smack the top (expect done)
   it('allows for binding to both edges with different promise callbacks', function (done) {
     $('.case1').toTop();
 
@@ -103,7 +99,6 @@ describe('Bum smack', function () {
     $('.case1').toPercentFromTop(0.8);
   });
 
-
   it('smacks a percentage threshold away from the bottom', function (done) {
     $('.case3').smack({ threshold: 0.8 }).done(done);
     $('.case3').toPercentFromTop(0.8);
@@ -116,8 +111,18 @@ describe('Bum smack', function () {
     $('.case3').toPercentFromTop(0.2);
   });
 
-  it('should not smack the top threshold scrolling down', function () {
+  it('should not smack the top threshold scrolling down', function (done) {
+    var cb = sinon.spy();
 
+    $('.case1').toTop();
+    $('.case1').smack({ edge: 'top', threshold: 0.2 }).done(cb);
+    $('.case1').toPercentFromTop(0.3);
+    $('.case1').smack({ edge: 'top', threshold: 0.2 }).done(function () {
+      chai.expect(cb.called).to.equal(false);
+      done();
+    });
+
+    $('.case1').toPercentFromTop(0.2);
   });
 
   it('smacks a pixel distance away from the bottom', function (done) {
