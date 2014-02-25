@@ -38,7 +38,7 @@ describe('Bum smack', function () {
     this.scrollTop(getPercentageScrollTop(this, percent));
     return this;
   };
-  $.fn.toPixelsFromTop = function (pixel) {
+  $.fn.toPixelsFromBottom = function (pixel) {
     this.scrollTop(getPixelScrollTop(this, parseInt(pixel, 10)));
     return this;
   };
@@ -127,14 +127,13 @@ describe('Bum smack', function () {
 
   it('smacks a pixel distance away from the bottom', function (done) {
     $('.case4').smack({ threshold: '50px' }).done(done);
-    $('.case4').toPixelsFromTop(50);
+    $('.case4').toPixelsFromBottom(50);
   });
 
   it('smacks a pixel distance away from the top', function (done) {
-    $('.case4').toTop();
-    $('.case4').toPixelsFromTop(100);
+    $('.case4').toBottom();
     $('.case4').smack({ edge: 'top', threshold: '50px' }).done(done);
-    $('.case4').toPixelsFromTop(50);
+    $('.case4').toTop(50);
   });
 
   it('smacks the bottom of the page', function (done) {
