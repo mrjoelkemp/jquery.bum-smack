@@ -1,0 +1,21 @@
+{
+  "name": "jquery.bum-smack",
+  "version": "1.1.1",
+  "homepage": "https://github.com/mrjoelkemp/jquery.bum-smack",
+  "authors": [
+    "Joel Kemp <joel@mrjoelkemp.com>"
+  ],
+  "description": "For when you hit the bottom of an element while scrolling",
+  "main": "src/jquery.bum-smack.js",
+  "keywords": [
+    "backbone",
+    "infinite scroll"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "test"
+  ],
+  "dependencies": {
+    "jquery": "*"
+  }
+}
