@@ -1,4 +1,4 @@
-/* global describe: true, it: true */
+/* global describe: true, it: true, sinon: true, chai: true expect: true */
 describe('Bum smack', function () {
 
   // Helpers
@@ -39,13 +39,13 @@ describe('Bum smack', function () {
     $('.case1').scrollTop(0);
   });
 
+  it('does not smack the top edge if the element was already at the top', function () {
+    var cb = sinon.spy();
 
-  // $('.case1').scrollTop(0);
-  // $('.case1').smack({ edge: 'top' }).done(cb);
-  // expect(cb).to.not.have.been.called;
-  // TODO: Add sinon to assert that smack has not been called
-  // http://chaijs.com/plugins/sinon-chai
-  it('does not smack the top edge if the element was already at the top');
+    $('.case1').scrollTop(0);
+    $('.case1').smack({ edge: 'top' }).done(cb);
+    chai.expect(cb.called).to.equal(false);
+  });
 
   // Reset element's scrollTop to top
   // Bind to 50px from bottom
