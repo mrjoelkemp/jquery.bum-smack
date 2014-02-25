@@ -57,7 +57,15 @@ describe('Bum smack', function () {
   // Do a smack bind on that element
   // Scroll
   // Expect the first (manual) binding to never be called
-  it('only has one active smack binding');
+  it('only has one active smack binding', function () {
+    var cb1 = sinon.spy();
+
+    $('.case1').scrollTop(0);
+    $('.case1').on('scroll.smack', cb1);
+    $('.case1').smack({ threshold: 0.8 }).done();
+    $('.case1').scrollTop(getPercentageScrollTop($('.case1'), 0.8));
+    chai.expect(cb1.called).to.equal(false);
+  });
 
   // Bind to the bottom edge
   // Bind to the top edge
@@ -67,14 +75,14 @@ describe('Bum smack', function () {
 
   it.skip('smacks either edge if "either" is supplied as the edge', function (done) {
     // Test that it smacks the top edge
-    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 10));
+    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 0.1));
     $('.case2').smack({ edge: 'either' }).done(done);
     $('.case2').scrollTop(0);
 
     // Test that it smacks the bottom edge
-    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 90));
+    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 0.9));
     $('.case2').smack({ edge: 'either' }).done(done);
-    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 100));
+    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 1));
   });
 
   it('smacks a percentage threshold away from the bottom', function (done) {
