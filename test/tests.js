@@ -70,25 +70,21 @@ describe('Bum smack', function () {
   // Bind to the top edge
   // Smack the bottom (expect done)
   // Smack the top (expect done)
-  it('allows for binding to both edges with different promise callbacks', function () {
-    var cb = sinon.spy();
-
+  it('allows for binding to both edges with different promise callbacks', function (done) {
     $('.case1').scrollTop(0);
-    // $('.case1').smack({ threshold: 1 }).done(cb);
-    // $('.case1').smack({ threshold: 1 }).done(cb);
+
+    $('.case1').smack({ threshold: 0.8 }).done(function () {
+      // Smack top
+      $('.case1').scrollTop(0);
+    });
+
+    $('.case1').smack({ edge: 'top' }).done(function () {
+      done();
+    });
+
+    $('.case1').scrollTop(getPercentageScrollTop($('.case1'), 0.8));
   });
 
-  it.skip('smacks either edge if "either" is supplied as the edge', function (done) {
-    // Test that it smacks the top edge
-    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 0.1));
-    $('.case2').smack({ edge: 'either' }).done(done);
-    $('.case2').scrollTop(0);
-
-    // Test that it smacks the bottom edge
-    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 0.9));
-    $('.case2').smack({ edge: 'either' }).done(done);
-    $('.case2').scrollTop(getPercentageScrollTop($('.case2'), 1));
-  });
 
   it('smacks a percentage threshold away from the bottom', function (done) {
     $('.case3').smack({ threshold: 0.8 }).done(done);
