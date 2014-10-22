@@ -28,7 +28,7 @@
     $this.data('bum-smack', bumSmackOptions);
 
     // Only allow a single scroll event binding
-    $this.off('scroll.smack').on('scroll.smack', function () {
+    $this.on('scroll.smack', function checkScroll() {
       var scrollTop     = $this.scrollTop(),
           // Keep these computed here in case the div changes dimensions at runtime
           innerHeight   = $this[0] === window ? $this.height() : $this.innerHeight(),
@@ -69,7 +69,7 @@
 
       // If the configured smack for the edge has been met
       if (!bumSmackOptions.top && !bumSmackOptions.bottom) {
-        $this.off('scroll.smack');
+        $this.off('scroll.smack', checkScroll);
       }
 
     });
